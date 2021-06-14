@@ -1,8 +1,12 @@
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import App from './App';
 
-test('renders learn react link', () => {
+test('should show movie page as default', () => {
+
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  const moviePage = screen.getByTestId('movie-page');
+
+  expect(moviePage).toBeInTheDocument();
 });

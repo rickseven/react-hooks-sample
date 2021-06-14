@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { HashRouter, Route, Switch } from "react-router-dom";
+import MoviePage from './pages/movie';
+import MovieSinglePage from './pages/movie/single';
+import { useGlobal } from './hooks';
 
 function App() {
+
+  const [state, dispatch] = useGlobal();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HashRouter>
+        <Switch>
+          <Route path="/:id">
+            <MovieSinglePage />
+          </Route>
+          <Route path="/" exact>
+            <MoviePage state={state} dispatch={dispatch} />
+          </Route>
+        </Switch>
+      </HashRouter>
     </div>
   );
 }
